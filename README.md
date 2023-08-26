@@ -1,11 +1,10 @@
 # Paddy form
 This is an app to improve a workflow when depositing many tasks into zendesk (setting the correct tags and format, etc)
-It works via the https://developer.zendesk.com/api-reference/ticketing/tickets/tickets/#create-many-tickets 
+It works via the [zendesk api](https://developer.zendesk.com/api-reference/ticketing/tickets/tickets/#create-many-tickets) 
 
 
 
-
-
+## Tech
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
