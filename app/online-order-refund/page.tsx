@@ -11,7 +11,7 @@ const OnlineRefundForm = () => {
     const ibtArray = ibts.toString().match(/[^\D\r\n]+/g);
 
     if (ibtArray === null) {
-      throw new Error("no numbers found");
+      throw new Error("No numbers found within the IBT text");
     }
 
     const ticketPayload = ibtArray.map((ibt) => {
