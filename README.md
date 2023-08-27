@@ -27,5 +27,5 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You will need to add your zendesk keys to the .env file
+You will need to paste in zendesk api keys to the .env file  
 
