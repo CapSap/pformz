@@ -1,27 +1,30 @@
 const OnlineRefundForm = () => {
-  const submitIbts = async (data) => {
+  const submitIbts = async (data: FormData) => {
     "use server";
     const ibts = await data.get("ibt");
     const author = await data.get("author");
 
-    console.log(ibts);
-
-    if (ibts.match(/[^\D\r\n]+/g)) {
-      console.log("match", ibts);
-      console.log(ibts.match(/[^\D\r\n]+/g));
-
-      const ticketPayload = ibts.match(/[^\D\r\n]+/g).map((ibt) => {
-        return {
-          comment: {
-            body: `There is an issue with this IBT ${ibt}. issue was found by ${author}`,
-          },
-          subject: `IBT with a problem: IBT no ${ibt}`,
-          tags: ["of_todo", "problem_ibt"],
-        };
-      });
-
-      console.log(ticketPayload);
+    if (ibts === null || author === null) {
+      throw new Error("ibt or author is null");
     }
+
+    const ibtArray = ibts.toString().match(/[^\D\r\n]+/g);
+
+    if (ibtArray === null) {
+      throw new Error("no numbers found");
+    }
+
+    const ticketPayload = ibtArray.map((ibt) => {
+      return {
+        comment: {
+          body: `There is an issue with this IBT ${ibt}. issue was found by ${author}`,
+        },
+        subject: `IBT with a problem: IBT no ${ibt}`,
+        tags: ["of_todo", "problem_ibt"],
+      };
+    });
+
+    console.log(ticketPayload);
   };
 
   return (
