@@ -11,7 +11,7 @@ It works via the [zendesk api](https://developer.zendesk.com/api-reference/ticke
 
 ## Tech
 - This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-- Also using Tailwind for styling
+- Tailwind for styling
 
 ## Getting Started
 
