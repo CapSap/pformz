@@ -20,13 +20,11 @@ export const GET = async (req: Request) => {
 
   myHeaders.append("Authorization", `Basic ${base64Encoded}`);
 
-  const now = new Date();
-
   const raw = JSON.stringify({
     tickets: [
       {
         comment: {
-          body: "TEST from next form at " + now,
+          body: "TEST from next form at " + Date(),
         },
         subject: "TEST from next",
         tags: ["of_todo", "TEST", "problem_ibt"],
