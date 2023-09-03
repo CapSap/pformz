@@ -25,7 +25,13 @@ const OnlineRefundForm = () => {
       };
     });
 
-    console.log(ticketPayload);
+    const response = await fetch("http://localhost:3000/api/problem-ibts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ test: "test" }),
+    });
+
+    console.log("res", response.body);
   };
 
   return (
