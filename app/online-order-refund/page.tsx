@@ -17,10 +17,11 @@ const OnlineRefundForm = () => {
     const ticketPayload = ibtArray.map((ibt) => {
       return {
         comment: {
-          body: `There is an issue with this IBT ${ibt}. issue was found by ${author}`,
+          body: `There is an issue with this IBT ${ibt}. issue was found by ${author}. Sent from next at ${Date()}`,
         },
         subject: `IBT with a problem: IBT no ${ibt}`,
         tags: ["of_todo", "problem_ibt"],
+        custom_fields: [{ id: "7565917494287", value: ibt }],
       };
     });
 
