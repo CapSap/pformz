@@ -13,7 +13,12 @@ export const GET = async (req: Request) => {
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", `Basic ${process.env.ZEN_ENCODED_TOKEN}`);
+
+  const base64Encoded = btoa(
+    `${process.env.ZEN_USER}/token:${process.env.ZEN_TOKEN}`,
+  );
+
+  myHeaders.append("Authorization", `Basic ${base64Encoded}`);
 
   const now = new Date();
 
