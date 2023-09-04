@@ -1,6 +1,7 @@
 const OnlineRefundForm = () => {
   const submitIbts = async (data: FormData) => {
     "use server";
+
     const ibts = await data.get("ibt");
     const author = await data.get("author");
 
@@ -19,19 +20,37 @@ const OnlineRefundForm = () => {
         comment: {
           body: `There is an issue with this IBT ${ibt}. issue was found by ${author}. Sent from next at ${Date()}`,
         },
-        subject: `IBT with a problem: IBT no ${ibt}`,
+        subject: `TEST from web form IBT with a problem: IBT no ${ibt}`,
         tags: ["of_todo", "problem_ibt"],
         custom_fields: [{ id: "7565917494287", value: ibt }],
       };
     });
 
-    const response = await fetch("http://localhost:3000/api/problem-ibts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ test: "test" }),
-    });
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    console.log("res", response.body);
+    const base64Encoded = btoa(
+      `${process.env.ZEN_USER}/token:${process.env.ZEN_TOKEN}`,
+    );
+
+    myHeaders.append("Authorization", `Basic ${base64Encoded}`);
+
+    const requestOptions: RequestInit = {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify({ tickets: ticketPayload }),
+      redirect: "follow",
+    };
+
+    const result = await fetch(
+      "https://paddypallin.zendesk.com/api/v2/tickets/create_many",
+      requestOptions,
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+
+    return result;
   };
 
   return (
