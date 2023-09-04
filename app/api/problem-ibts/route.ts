@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
-  console.log(req.body);
+  console.log("post request starting on route");
 
   if (!req.body) {
     return NextResponse.json({ error: "no body", status: 400 });
@@ -50,9 +50,6 @@ export const POST = async (req: Request) => {
 };
 
 export const GET = async (req: Request) => {
-  console.log(process.env.ZEN_USER);
-  console.log(req.body);
-
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
