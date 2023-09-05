@@ -1,22 +1,10 @@
-"use client";
-
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import submitIbts from "../_utils/serverActions";
 
 const OnlineRefundForm = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log(e.target);
-  };
-
   return (
     <div>
-      <form
-        // onSubmit={(e) => handleSubmit(e)}
-        action={submitIbts}
-        className="flex flex-col justify-center m-12"
-      >
+      <form action={submitIbts} className="flex flex-col justify-center m-12">
         <label htmlFor="ibt">IBT: </label>
         <textarea className="border border-black" name="ibt"></textarea>
 
