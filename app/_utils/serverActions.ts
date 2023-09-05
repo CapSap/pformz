@@ -1,8 +1,8 @@
 "use server";
 
 const submitIbts = async (data: FormData) => {
-  const ibts = await data.get("ibt");
-  const author = await data.get("author");
+  const ibts = data.get("ibt");
+  const author = data.get("author");
 
   if (ibts === null || author === null) {
     throw new Error("ibt or author is null");
