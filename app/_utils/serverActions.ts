@@ -53,5 +53,46 @@ export const submitIbts = async (data: FormData) => {
 };
 
 export async function getData() {
-  return "test";
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const base64Encoded = btoa(
+    `${process.env.ZEN_USER}/token:${process.env.ZEN_TOKEN}`,
+  );
+
+  myHeaders.append("Authorization", `Basic ${base64Encoded}`);
+
+  const requestOptions: RequestInit = {
+    method: "GET",
+    headers: myHeaders,
+  };
+
+  const searchQuery = `tags:problem_ibt`;
+
+  const result = await fetch(
+    `https://paddypallin.zendesk.com/api/v2/search?query=${searchQuery}`,
+    requestOptions,
+  )
+    .then((response) => response.text())
+    .then((result) => JSON.parse(result))
+    .catch((error) => console.log("error", error));
+
+  const cleaned = result.results.map(
+    (ticket: {
+      id: number;
+      ibt: string;
+      custom_fields: [{ id: number; value: string }];
+    }) => {
+      const problem_ibt = ticket.custom_fields.find(
+        (field) => field.id === 7565917494287,
+      );
+
+      return {
+        ticket_id: ticket.id,
+        problem_ibt: problem_ibt ? problem_ibt.value : null,
+      };
+    },
+  );
+
+  return cleaned;
 }
