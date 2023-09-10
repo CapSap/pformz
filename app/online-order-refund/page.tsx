@@ -1,7 +1,12 @@
 import { FormEvent, useState } from "react";
-import submitIbts from "../_utils/serverActions";
 
-const OnlineRefundForm = () => {
+import { getData, submitIbts } from "../_utils/serverActions";
+
+const OnlineRefundForm = async () => {
+  const data = await getData();
+
+  console.log("page log", data);
+
   return (
     <div>
       <form action={submitIbts} className="flex flex-col justify-center m-12">
