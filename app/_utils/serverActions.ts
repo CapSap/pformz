@@ -1,6 +1,6 @@
 "use server";
 
-const submitIbts = async (data: FormData) => {
+export const submitIbts = async (data: FormData) => {
   const ibts = data.get("ibt");
   const author = data.get("author");
 
@@ -52,4 +52,6 @@ const submitIbts = async (data: FormData) => {
   return result;
 };
 
-export default submitIbts;
+export async function getData() {
+  return "test";
+}
