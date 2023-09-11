@@ -3,9 +3,13 @@ import { FormEvent, useState } from "react";
 import { getData, submitIbts } from "../_utils/serverActions";
 
 const OnlineRefundForm = async () => {
-  const data = await getData();
+  const existingTickets: { ticket_id: number; problem_ibt: string }[] =
+    await getData();
 
-  console.log("page log", data);
+  console.log(
+    "problem ibts",
+    existingTickets.map((ticket) => ticket.problem_ibt),
+  );
 
   return (
     <div>
