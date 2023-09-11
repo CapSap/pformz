@@ -1,7 +1,16 @@
 import { FormEvent, useState } from "react";
-import submitIbts from "../_utils/serverActions";
 
-const OnlineRefundForm = () => {
+import { getData, submitIbts } from "../_utils/serverActions";
+
+const OnlineRefundForm = async () => {
+  const existingTickets: { ticket_id: number; problem_ibt: string }[] =
+    await getData();
+
+  console.log(
+    "problem ibts",
+    existingTickets.map((ticket) => ticket.problem_ibt),
+  );
+
   return (
     <div>
       <form action={submitIbts} className="flex flex-col justify-center m-12">
