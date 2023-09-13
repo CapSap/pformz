@@ -1,5 +1,6 @@
 "use client";
 
+import { ChangeEvent, useState } from "react";
 import { submitIbts } from "../_utils/serverActions";
 
 function ProblemIbtForm({
@@ -7,12 +8,21 @@ function ProblemIbtForm({
 }: {
   existingTickets: { ticket_id: number; problem_ibt: string }[];
 }) {
-  console.log(existingTickets);
+  const [ibts, setIbts] = useState<string[]>([]);
+
+  function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
+    setIbts(e.target.value.trim().split(/\s+/));
+    console.log(e.target.value.trim().split(/\s+/));
+  }
 
   return (
     <form action={submitIbts} className="flex flex-col justify-center m-12">
       <label htmlFor="ibt">IBT: </label>
-      <textarea className="border border-black" name="ibt"></textarea>
+      <textarea
+        className="border border-black"
+        name="ibt"
+        onChange={(e) => handleUpdate(e)}
+      ></textarea>
 
       <label htmlFor="author">Your Name: </label>
       <input
@@ -27,6 +37,12 @@ function ProblemIbtForm({
       >
         Send problem ibts to zendesk
       </button>
+      <div>
+        <p>Ibts that will be sent to zendesk</p>
+        {ibts.map((ibt, i) => (
+          <div key={ibt + i}>{ibt}</div>
+        ))}
+      </div>
     </form>
   );
 }
