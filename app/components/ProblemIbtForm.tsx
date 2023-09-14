@@ -8,12 +8,21 @@ function ProblemIbtForm({
 }: {
   existingTickets: { ticket_id: number; problem_ibt: string }[];
 }) {
-  const [ibts, setIbts] = useState<string[]>([]);
+  const [ibts, setIbts] = useState<string[]>();
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
+    // remove whitespace at start and end to prevent empty string element in array
+    // split at whitespaces
     setIbts(e.target.value.trim().split(/\s+/));
-    console.log(e.target.value.trim().split(/\s+/));
   }
+
+  const ibtsToBeSentToZendesk = ibts?.filter((ibt) => {
+    // filter out exist ibts and make them pass 5 digit no check
+    return (
+      !existingTickets.some((ticket) => ticket.problem_ibt === ibt) &&
+      ibt.match(/\b\d{5}\b/g)
+    );
+  });
 
   return (
     <form action={submitIbts} className="flex flex-col justify-center m-12">
@@ -38,10 +47,31 @@ function ProblemIbtForm({
         Send problem ibts to zendesk
       </button>
       <div>
-        <p>Ibts that will be sent to zendesk</p>
-        {ibts.map((ibt, i) => (
-          <div key={ibt + i}>{ibt}</div>
-        ))}
+        <p>Ibts that you have entered above</p>
+        <p>IBTs in red will not be sent to zendesk</p>
+        {ibts
+          ? ibts.map((ibt, i) => (
+              <div
+                key={ibt + i}
+                className={`${
+                  ibt.match(/\b\d{5}\b/g) &&
+                  existingTickets.find(
+                    (ticket) => ticket.problem_ibt === ibt,
+                  ) === undefined
+                    ? "border-green-500 border-4"
+                    : "border-red-700 border-4"
+                } p-1 m-2
+                  `}
+              >
+                {ibt}
+                {existingTickets.find(
+                  (ticket) => ticket.problem_ibt === ibt,
+                ) === undefined
+                  ? null
+                  : " This problem IBT already exists in Zendesk, it won't be sent"}
+              </div>
+            ))
+          : null}
       </div>
     </form>
   );
