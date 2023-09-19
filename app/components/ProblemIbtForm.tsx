@@ -54,7 +54,7 @@ function ProblemIbtForm({
               <div
                 key={ibt + i}
                 className={`${
-                  ibt.match(/\b\d{5}\b/g) &&
+                  ibt.match(/\b\d{7}\b/g) &&
                   existingTickets.find(
                     (ticket) => ticket.problem_ibt === ibt,
                   ) === undefined
