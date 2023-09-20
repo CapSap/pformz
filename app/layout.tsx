@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 const links = [
   { href: "/", label: "Home" },
   { href: "/online-order-refund", label: "Online order in-store refund" },
+  { href: "/server-form", label: "Server Form" },
 ];
 
 export default function RootLayout({
