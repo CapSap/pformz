@@ -69,30 +69,31 @@ export async function getData() {
 
   const searchQuery = `tags:problem_ibt`;
 
-  const result = await fetch(
+  return await fetch(
     `https://paddypallin.zendesk.com/api/v2/search?query=${searchQuery}`,
     requestOptions,
   )
     .then((response) => response.text())
     .then((result) => JSON.parse(result))
-    .catch((error) => console.log("error", error));
+    .then((result) => {
+      return result.results.map(
+        (ticket: {
+          id: number;
+          ibt: string;
+          custom_fields: [{ id: number; value: string }];
+        }) => {
+          const problem_ibt = ticket.custom_fields.find(
+            (field) => field.id === 7565917494287,
+          );
 
-  const cleaned = result.results.map(
-    (ticket: {
-      id: number;
-      ibt: string;
-      custom_fields: [{ id: number; value: string }];
-    }) => {
-      const problem_ibt = ticket.custom_fields.find(
-        (field) => field.id === 7565917494287,
+          return {
+            ticket_id: ticket.id,
+            problem_ibt: problem_ibt ? problem_ibt.value : null,
+          };
+        },
       );
-
-      return {
-        ticket_id: ticket.id,
-        problem_ibt: problem_ibt ? problem_ibt.value : null,
-      };
-    },
-  );
-
-  return cleaned;
+    })
+    .catch((error) =>
+      console.error("there was an error fetching tickets from zendesk", error),
+    );
 }
