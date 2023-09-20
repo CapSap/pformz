@@ -63,7 +63,7 @@ export const GET = async (req: Request) => {
     tickets: [
       {
         comment: {
-          body: "TEST from next form at " + Date(),
+          body: "TEST request on get route. from next form at " + Date(),
         },
         subject: "TEST from next",
         tags: ["of_todo", "TEST", "problem_ibt"],
