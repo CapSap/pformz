@@ -17,7 +17,7 @@ export const POST = async (req: Request) => {
   myHeaders.append("Authorization", `Basic ${base64Encoded}`);
 
   const ticketPayload = await req.json().then((req) =>
-    req.ibts.map((ibt) => ({
+    req.ibts.map((ibt: string) => ({
       comment: {
         body: `There is an issue with this IBT ${ibt}. issue was found by ${
           req.author
@@ -39,25 +39,21 @@ export const POST = async (req: Request) => {
     body: raw,
     redirect: "follow",
   };
+
   try {
-    const result = await fetch(
+    return await fetch(
       "https://paddypallin.zendesk.com/api/v2/tickets/create_many",
       requestOptions,
     )
       .then((response) => response.text())
-      .then((result) => result)
-      .catch((error) => console.log("error", error));
-
-    return NextResponse.json({
-      message: "request sent to zendesk",
-      bod: result,
-    });
+      .then((result) => {
+        return NextResponse.json({
+          message: "request sent to zendesk",
+          bod: result,
+        });
+      });
   } catch (error) {
+    console.error("error with making post request to zendesk", error);
     return error;
   }
-
-  return NextResponse.json({
-    message: "request sent to zendesk",
-    bod: "body",
-  });
 };
