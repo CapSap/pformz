@@ -71,6 +71,7 @@ function ProblemIbtForm({
       >
         Send problem ibts to zendesk
       </button>
+      {!requestStatus ? null : <div>test</div>}
       {sucess ? "IBTs sucessfully sent to zendesk" : null}
       <div>
         <p>Ibts that you have entered above</p>
