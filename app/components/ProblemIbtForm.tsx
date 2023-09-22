@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { submitIbts } from "../_utils/serverActions";
 
 function ProblemIbtForm({
@@ -9,6 +9,9 @@ function ProblemIbtForm({
   existingTickets: { ticket_id: number; problem_ibt: string }[];
 }) {
   const [ibts, setIbts] = useState<string[]>();
+  const [author, setAuthor] = useState<string>();
+
+  let sucess;
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
     // remove whitespace at start and end to prevent empty string element in array
@@ -17,15 +20,31 @@ function ProblemIbtForm({
   }
 
   const ibtsToBeSentToZendesk = ibts?.filter((ibt) => {
-    // filter out exist ibts and make them pass 5 digit no check
+    // filter out exist ibts and make them pass 7 digit number check
     return (
       !existingTickets.some((ticket) => ticket.problem_ibt === ibt) &&
-      ibt.match(/\b\d{5}\b/g)
+      ibt.match(/\b\d{7}\b/g)
     );
   });
 
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const res = await fetch("http://localhost:3000/api/problem-ibts", {
+      method: "POST",
+      body: JSON.stringify({ ibts: ibtsToBeSentToZendesk, author: author }),
+    })
+      .then((res) => res.text())
+      .then((res) => console.log(res));
+
+    return;
+  }
+
   return (
-    <form action={submitIbts} className="flex flex-col justify-center m-12">
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      // action={submitIbts}
+      className="flex flex-col justify-center m-12"
+    >
       <label htmlFor="ibt">IBT: </label>
       <textarea
         className="border border-black"
@@ -38,6 +57,8 @@ function ProblemIbtForm({
         className="border border-black mb-3"
         required={true}
         name="author"
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
       ></input>
 
       <button
@@ -46,6 +67,7 @@ function ProblemIbtForm({
       >
         Send problem ibts to zendesk
       </button>
+      {sucess ? "IBTs sucessfully sent to zendesk" : null}
       <div>
         <p>Ibts that you have entered above</p>
         <p>IBTs in red will not be sent to zendesk</p>
