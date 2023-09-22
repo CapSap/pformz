@@ -10,6 +10,7 @@ function ProblemIbtForm({
 }) {
   const [ibts, setIbts] = useState<string[]>();
   const [author, setAuthor] = useState<string>();
+  const [requestStatus, setRequestStatus] = useState(undefined);
 
   let sucess;
 
@@ -33,8 +34,11 @@ function ProblemIbtForm({
       method: "POST",
       body: JSON.stringify({ ibts: ibtsToBeSentToZendesk, author: author }),
     })
-      .then((res) => res.text())
-      .then((res) => console.log(res));
+      .then((res) => res.json())
+      .then((res) => JSON.parse(res.body))
+      .then((res) => setRequestStatus(res));
+
+    console.log("req status state", requestStatus);
 
     return;
   }
