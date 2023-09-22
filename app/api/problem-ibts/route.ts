@@ -49,7 +49,7 @@ export const POST = async (req: Request) => {
       .then((result) => {
         return NextResponse.json({
           message: "request sent to zendesk",
-          bod: result,
+          body: result,
         });
       });
   } catch (error) {
