@@ -18,6 +18,7 @@ export const POST = async (req: Request) => {
 
   const ticketPayload = await req.json().then((req) =>
     req.ibts.map((ibt: string) => ({
+      assignee_email: "customerservice@paddypallin.com.au",
       comment: {
         body: `There is an issue with this IBT ${ibt}. issue was found by ${
           req.author
