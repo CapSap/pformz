@@ -51,8 +51,6 @@ function ProblemIbtForm({
     return;
   }
 
-  console.log("req status state", requestStatus);
-
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
