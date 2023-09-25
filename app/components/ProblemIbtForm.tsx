@@ -10,9 +10,7 @@ function ProblemIbtForm({
 }) {
   const [ibts, setIbts] = useState<string[]>();
   const [author, setAuthor] = useState<string>();
-  const [requestStatus, setRequestStatus] = useState(undefined);
-
-  let sucess;
+  const [requestStatus, setRequestStatus] = useState<any>(undefined);
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
     // remove whitespace at start and end to prevent empty string element in array
@@ -38,10 +36,10 @@ function ProblemIbtForm({
       .then((res) => JSON.parse(res.body))
       .then((res) => setRequestStatus(res));
 
-    console.log("req status state", requestStatus);
-
     return;
   }
+
+  console.log("req status state", requestStatus);
 
   return (
     <form
@@ -71,8 +69,12 @@ function ProblemIbtForm({
       >
         Send problem ibts to zendesk
       </button>
-      {!requestStatus ? null : <div>test</div>}
-      {sucess ? "IBTs sucessfully sent to zendesk" : null}
+      {requestStatus?.job_status?.status === "queued" ? (
+        <div>
+          IBT sent to zendesk, check progress{" "}
+          <a href={requestStatus?.job_status?.url}>here</a>
+        </div>
+      ) : null}
       <div>
         <p>Ibts that you have entered above</p>
         <p>IBTs in red will not be sent to zendesk</p>
