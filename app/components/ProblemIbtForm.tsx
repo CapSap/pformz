@@ -3,6 +3,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { submitIbts } from "../_utils/serverActions";
 
+type RequestStatus = {
+  job_status: {};
+};
+
 function ProblemIbtForm({
   existingTickets,
 }: {
@@ -10,7 +14,7 @@ function ProblemIbtForm({
 }) {
   const [ibts, setIbts] = useState<string[]>();
   const [author, setAuthor] = useState<string>("");
-  const [requestStatus, setRequestStatus] = useState<any>(undefined);
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>();
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
     // remove whitespace at start and end to prevent empty string element in array
@@ -51,7 +55,10 @@ function ProblemIbtForm({
       <textarea
         className="border border-black"
         name="ibt"
-        onChange={(e) => handleUpdate(e)}
+        onChange={(e) => {
+          setRequestStatus(undefined);
+          handleUpdate(e);
+        }}
       ></textarea>
 
       <label htmlFor="author">Your Name: </label>
@@ -60,7 +67,10 @@ function ProblemIbtForm({
         required={true}
         name="author"
         value={author}
-        onChange={(e) => setAuthor(e.target.value)}
+        onChange={(e) => {
+          setRequestStatus(undefined);
+          setAuthor(e.target.value);
+        }}
       ></input>
 
       <button
@@ -70,14 +80,16 @@ function ProblemIbtForm({
         Send problem ibts to zendesk
       </button>
       {requestStatus?.job_status?.status === "queued" ? (
-        <div>
-          IBT sent to zendesk, check progress{" "}
+        <div className="border-orange-400 p-2 border-2 m-4 ">
+          IBT sucessfully sent to zendesk, check progress{" "}
           <a href={requestStatus?.job_status?.url}>here</a>
         </div>
       ) : null}
       <div>
-        <p>Ibts that you have entered above</p>
-        <p>IBTs in red will not be sent to zendesk</p>
+        <p>Ibts that you have entered above will appear below</p>
+        <p>
+          IBTs in red will not be sent to zendesk, green will be sent to zendesk
+        </p>
         {ibts
           ? ibts.map((ibt, i) => (
               <div
