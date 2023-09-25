@@ -9,7 +9,7 @@ function ProblemIbtForm({
   existingTickets: { ticket_id: number; problem_ibt: string }[];
 }) {
   const [ibts, setIbts] = useState<string[]>();
-  const [author, setAuthor] = useState<string>();
+  const [author, setAuthor] = useState<string>("");
   const [requestStatus, setRequestStatus] = useState<any>(undefined);
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
