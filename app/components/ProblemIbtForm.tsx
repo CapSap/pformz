@@ -4,7 +4,15 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { submitIbts } from "../_utils/serverActions";
 
 type RequestStatus = {
-  job_status: {};
+  job_status: {
+    id: string;
+    message: string;
+    progress: number;
+    status: string;
+    url: string;
+    total: number;
+    results: [];
+  };
 };
 
 function ProblemIbtForm({
@@ -80,9 +88,11 @@ function ProblemIbtForm({
         Send problem ibts to zendesk
       </button>
       {requestStatus?.job_status?.status === "queued" ? (
-        <div className="border-orange-400 p-2 border-2 m-4 ">
+        <div className="border-orange-400 p-2 border-2 m-4 rounded ">
           IBT sucessfully sent to zendesk, check progress{" "}
-          <a href={requestStatus?.job_status?.url}>here</a>
+          <a href={requestStatus?.job_status?.url} className="text-indigo-600">
+            here
+          </a>
         </div>
       ) : null}
       <div>
@@ -99,8 +109,8 @@ function ProblemIbtForm({
                   existingTickets.find(
                     (ticket) => ticket.problem_ibt === ibt,
                   ) === undefined
-                    ? "border-green-500 border-4"
-                    : "border-red-700 border-4"
+                    ? "border-green-500 border-2 rounded"
+                    : "border-red-700 border-2 rounded"
                 } p-1 m-2
                   `}
               >
