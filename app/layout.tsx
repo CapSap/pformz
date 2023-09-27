@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { ClerkProvider, UserButton } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,8 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/online-order-refund", label: "Online order in-store refund" },
   { href: "/server-form", label: "Server Form" },
+  { href: "/sign-in", label: "Sign in" },
+  { href: "/sign-up", label: "Sign up" },
 ];
 
 export default function RootLayout({
@@ -22,22 +25,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <header>
-          <nav>
-            <ul className="flex items-center">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <header>
+            <nav>
+              <ul className="flex items-center">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href}>{link.label}</Link>
+                  </li>
+                ))}
+                <li>
+                  <UserButton afterSignOutUrl="/" />
                 </li>
-              ))}
-            </ul>
-          </nav>
-        </header>
+              </ul>
+            </nav>
+          </header>
 
-        <div>{children}</div>
-      </body>
-    </html>
+          <div>{children}</div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
