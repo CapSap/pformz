@@ -43,9 +43,6 @@ export default function NavBar() {
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
-          <li>
-            <UserButton afterSignOutUrl="/" />
-          </li>
         </ul>
       </nav>
     );
