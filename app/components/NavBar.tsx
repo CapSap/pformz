@@ -21,14 +21,14 @@ export default function NavBar() {
 
   if (isSignedIn) {
     return (
-      <nav>
-        <ul className="flex items-center">
+      <nav className="flex justify-end">
+        <ul className="flex items-center justify-end border-blue-500 border bg-blue-300 h-16">
           {links.map((link) => (
-            <li key={link.href}>
+            <li key={link.href} className="mx-2 text-lg hover:underline">
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
-          <li>
+          <li className="mx-2">
             <UserButton afterSignOutUrl="/" />
           </li>
         </ul>
