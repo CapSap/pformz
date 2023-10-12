@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.landing-background {
+  position: absolute;
+  background: rgb(196, 161, 161);
+  height: 480px;
+  width: 100%;
+  margin-top: -64px;
+  clip-path: polygon(100% 0%, 0% 95%, 0% 0%);
+  z-index: -1;
+}
