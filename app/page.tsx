@@ -2,6 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -12,9 +13,12 @@ export default function Home() {
         <div className="landing-background"></div>
         <div className="ml-60 pt-72 ">
           <h1 className="text-[12rem]">pformz</h1>
-          <button className="text-2xl bg-slate-200 py-3 px-10 ml-32 rounded-2xl">
+          <Link
+            className="text-2xl bg-slate-200 py-3 px-10 ml-32 rounded-2xl"
+            href="/sign-in"
+          >
             Sign in
-          </button>
+          </Link>
         </div>
         <div className="landing-circle"></div>
       </div>
