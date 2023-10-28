@@ -10,9 +10,12 @@ export default function Home() {
     return (
       <div>
         <div className="landing-background"></div>
-        <h1 className="text-9xl ml-32">pformz</h1>
-        <p>hello and welcome to the paddy form app. sign in to get started</p>
-        <button className="text-2xl bg-slate-200 p-3">Sign in</button>
+        <div className="ml-60 pt-72 ">
+          <h1 className="text-[12rem]">pformz</h1>
+          <button className="text-2xl bg-slate-200 py-3 px-10 ml-32 rounded-2xl">
+            Sign in
+          </button>
+        </div>
       </div>
     );
   } else if (isSignedIn) {
