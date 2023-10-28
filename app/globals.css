@@ -11,3 +11,11 @@
   clip-path: polygon(100% 0%, 0% 95%, 0% 0%);
   z-index: -1;
 }
+
+.landing-circle {
+  background: blueviolet;
+  height: 14rem;
+  width: 14rem;
+  border-radius: 50%;
+  margin-left: 80%;
+}
