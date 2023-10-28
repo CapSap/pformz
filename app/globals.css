@@ -5,9 +5,9 @@
 .landing-background {
   position: absolute;
   background: rgb(196, 161, 161);
-  height: 480px;
+  height: 600px;
   width: 100%;
-  margin-top: -64px;
+  margin-top: -6.5rem;
   clip-path: polygon(100% 0%, 0% 95%, 0% 0%);
   z-index: -1;
 }
