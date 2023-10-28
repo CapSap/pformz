@@ -27,8 +27,17 @@ export default function Home() {
     return (
       <div>
         <div className="landing-background"></div>
-        hello and welcome {user.emailAddresses[0].emailAddress} to the paddy
-        form app.
+        <div className="ml-60 pt-72 ">
+          <h1 className="text-9xl">
+            Welcome {user.emailAddresses[0].emailAddress}
+          </h1>
+          <p className="text-5xl mt-10">
+            hello and welcome to the paddy form app.
+          </p>
+          <p className="text-4xl mt-2">
+            Click a link in the top left to get started
+          </p>
+        </div>
       </div>
     );
   }
