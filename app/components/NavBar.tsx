@@ -22,7 +22,7 @@ export default function NavBar() {
   if (isSignedIn) {
     return (
       <nav className="flex justify-end">
-        <ul className="flex items-center justify-end border-lime-500 border bg-lime-300 h-16">
+        <ul className="flex items-center justify-end border-lime-500 border bg-lime-300 h-16 pr-6 mt-10">
           {links.map((link) => (
             <li key={link.href} className="mx-2 text-lg hover:underline">
               <Link href={link.href}>{link.label}</Link>
