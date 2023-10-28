@@ -16,6 +16,7 @@ export default function Home() {
             Sign in
           </button>
         </div>
+        <div className="landing-circle"></div>
       </div>
     );
   } else if (isSignedIn) {
