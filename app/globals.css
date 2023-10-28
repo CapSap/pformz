@@ -4,7 +4,7 @@
 
 .landing-background {
   position: absolute;
-  background: rgb(196, 161, 161);
+  background: #118426;
   height: 600px;
   width: 100%;
   margin-top: -6.5rem;
@@ -13,9 +13,11 @@
 }
 
 .landing-circle {
-  background: blueviolet;
+  background: #f9b670;
   height: 14rem;
   width: 14rem;
   border-radius: 50%;
   margin-left: 80%;
 }
+
+/* palette #118426, #329c23, #78b931, #c9d440, #e8c656, #f9b670 */

@@ -22,7 +22,7 @@ export default function NavBar() {
   if (isSignedIn) {
     return (
       <nav className="flex justify-end">
-        <ul className="flex items-center justify-end border-blue-500 border bg-blue-300 h-16">
+        <ul className="flex items-center justify-end border-lime-500 border bg-lime-300 h-16">
           {links.map((link) => (
             <li key={link.href} className="mx-2 text-lg hover:underline">
               <Link href={link.href}>{link.label}</Link>
@@ -37,7 +37,7 @@ export default function NavBar() {
   } else {
     return (
       <nav className="flex justify-end">
-        <ul className="flex items-center justify-end border-blue-500 border bg-blue-300 h-16 pr-44 mt-10">
+        <ul className="flex items-center justify-end border-lime-500 border bg-lime-300 h-16 pr-44 mt-10">
           {notSignedInLinks.map((link) => (
             <li key={link.href} className="mx-2 text-lg hover:underline">
               <Link href={link.href}>{link.label}</Link>
