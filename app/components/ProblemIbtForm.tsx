@@ -55,11 +55,11 @@ function ProblemIbtForm({
     <form
       onSubmit={(e) => handleSubmit(e)}
       // action={submitIbts}
-      className="flex flex-col justify-center m-12"
+      className="flex flex-col justify-center items-center pt-20"
     >
-      <label htmlFor="ibt">IBT: </label>
+      <label htmlFor="ibt">IBT(s) </label>
       <textarea
-        className="border border-black"
+        className="border border-black resize w-1/5"
         name="ibt"
         onChange={(e) => {
           setRequestStatus(undefined);
@@ -67,7 +67,7 @@ function ProblemIbtForm({
         }}
       ></textarea>
 
-      <label htmlFor="author">Your Name: </label>
+      <label htmlFor="author">Your Name</label>
       <input
         className="border border-black mb-3"
         required={true}
