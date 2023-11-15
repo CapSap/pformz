@@ -35,7 +35,7 @@ export default function Home() {
             hello and welcome to the paddy form app.
           </p>
           <p className="text-4xl mt-2">
-            Click a link in the top left to get started
+            Click a link in the top right to get started
           </p>
         </div>
       </div>
