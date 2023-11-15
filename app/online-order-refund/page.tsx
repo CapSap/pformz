@@ -7,6 +7,8 @@ async function OnlineRefundForm() {
 
   return (
     <div>
+      <div className="landing-background opacity-25" />
+
       <ProblemIbtForm existingTickets={existingTickets} />
     </div>
   );
