@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.landing-background {
+  position: absolute;
+  background: #118426;
+  height: 600px;
+  width: 100%;
+  margin-top: -6.5rem;
+  clip-path: polygon(100% 0%, 0% 95%, 0% 0%);
+  z-index: -1;
+}
+
+.landing-circle {
+  background: #f9b670;
+  height: 14rem;
+  width: 14rem;
+  border-radius: 50%;
+  margin-left: 80%;
+}
+
+/* palette #118426, #329c23, #78b931, #c9d440, #e8c656, #f9b670 */
