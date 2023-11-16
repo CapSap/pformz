@@ -57,9 +57,11 @@ function ProblemIbtForm({
       // action={submitIbts}
       className="flex flex-col justify-center items-center pt-20"
     >
-      <label htmlFor="ibt">IBT(s) </label>
+      <label htmlFor="ibt" className="mb-1">
+        IBT(s)
+      </label>
       <textarea
-        className="border border-black resize w-1/5"
+        className="border border-black resize w-1/5 h-24 rounded-sm p-2 mb-4"
         name="ibt"
         onChange={(e) => {
           setRequestStatus(undefined);
@@ -67,9 +69,11 @@ function ProblemIbtForm({
         }}
       ></textarea>
 
-      <label htmlFor="author">Your Name</label>
+      <label htmlFor="author" className="mb-1">
+        Your Name
+      </label>
       <input
-        className="border border-black mb-3"
+        className="border border-black mb-3 rounded-sm "
         required={true}
         name="author"
         value={author}
@@ -81,7 +85,7 @@ function ProblemIbtForm({
 
       <button
         type="submit"
-        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="rounded-md bg-indigo-600 mb-6 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Send problem ibts to zendesk
       </button>
@@ -94,7 +98,7 @@ function ProblemIbtForm({
         </div>
       ) : null}
       <div>
-        <p>Ibts that you have entered above will appear below</p>
+        <p>IBTs that you have entered above will appear below</p>
         <p>
           IBTs in red will not be sent to zendesk, green will be sent to zendesk
         </p>
