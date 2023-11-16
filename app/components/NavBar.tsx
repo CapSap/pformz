@@ -6,8 +6,10 @@ import { useUser } from "@clerk/nextjs";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/online-order-refund", label: "Online order in-store refund" },
-  { href: "/server-form", label: "Server Form" },
+  {
+    href: "/online-order-refund",
+    label: "Submit bulk problem IBTs to zendesk",
+  },
 ];
 
 const notSignedInLinks = [
