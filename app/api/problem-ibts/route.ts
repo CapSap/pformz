@@ -20,11 +20,15 @@ export const POST = async (req: Request) => {
     req.ibts.map((ibt: string) => ({
       assignee_email: "customerservice@paddypallin.com.au",
       comment: {
-        body: `There is an issue with this IBT ${ibt}. issue was found by ${
+        body: `
+        There is an issue with this IBT ${ibt}. issue was found by ${
           req.author
-        }. Sent from next at ${Date()}`,
+        }.
+        
+
+        Sent from next at ${Date()}`,
       },
-      subject: `TEST from web form IBT with a problem: IBT no ${ibt}`,
+      subject: `IBT with a problem: IBT no ${ibt}`,
       tags: ["of_todo", "problem_ibt"],
       custom_fields: [{ id: "7565917494287", value: ibt }],
     })),
