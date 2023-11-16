@@ -55,7 +55,7 @@ function ProblemIbtForm({
     <form
       onSubmit={(e) => handleSubmit(e)}
       // action={submitIbts}
-      className="flex flex-col justify-center items-center pt-20"
+      className="flex flex-col justify-center items-center pt-20 text-lg"
     >
       <label htmlFor="ibt" className="mb-1">
         IBT(s)

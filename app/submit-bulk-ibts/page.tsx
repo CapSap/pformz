@@ -9,8 +9,8 @@ async function OnlineRefundForm() {
     <div>
       <div className="landing-background opacity-25" />
       <div className="pt-6 ml-6">
-        <h2 className="text-lg">Instructions:</h2>
-        <p className="w-1/3 ">
+        <h2 className="text-2xl font-bold">Instructions:</h2>
+        <p className="w-1/3 text-2xl">
           This form will create a ticket for each IBT problem IBT. The ticket
           will capture the IBT number and your name only (no order numbers). It
           will also check if the ticket already exists (only if the correct
