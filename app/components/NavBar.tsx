@@ -7,7 +7,7 @@ import { useUser } from "@clerk/nextjs";
 const links = [
   { href: "/", label: "Home" },
   {
-    href: "/online-order-refund",
+    href: "/submit-bulk-ibts",
     label: "Submit bulk problem IBTs to zendesk",
   },
 ];
