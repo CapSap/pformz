@@ -31,7 +31,8 @@ function ProblemIbtForm({
     setIbts(e.target.value.trim().split(/\s+/));
   }
 
-  const ibtsToBeSentToZendesk = ibts?.filter((ibt) => {
+  const ibtsToBeSentToZendesk = [...new Set(ibts)]?.filter((ibt) => {
+    // scrub out the duplicate ibts that user has inputted, but still send 1
     // filter out exist ibts and make them pass 7 digit number check
     return (
       !existingTickets.some((ticket) => ticket.problem_ibt === ibt) &&
