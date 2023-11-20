@@ -15,7 +15,7 @@ type store = {
 function StockChecker() {
   const [sku, setSku] = useState<string>();
 
-  const [storeStockLevels, setStoreStockLevels] = useState();
+  const [storeStockLevels, setStoreStockLevels] = useState<store[]>();
 
   async function checkSku(e) {
     e.preventDefault();
@@ -46,12 +46,26 @@ function StockChecker() {
       </form>
       <div>
         <h1>Results</h1>
-        {storeStockLevels.map((store) => (
-          <p>store{}</p>
-        ))}
+        {storeStockLevels && storeStockLevels.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Store</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {storeStockLevels.map((store) => (
+                <tr key={store.name}>
+                  <td>{store.name}</td>
+                  <td>{store.quantity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : null}
       </div>
     </div>
   );
 }
-
 export default StockChecker;
