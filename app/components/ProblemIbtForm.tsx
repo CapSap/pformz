@@ -23,6 +23,7 @@ function ProblemIbtForm({
   const [ibts, setIbts] = useState<string[]>();
   const [author, setAuthor] = useState<string>("");
   const [requestStatus, setRequestStatus] = useState<RequestStatus>();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
     // remove whitespace at start and end to prevent empty string element in array
@@ -48,7 +49,16 @@ function ProblemIbtForm({
       .then((res) => JSON.parse(res.body))
       .then((res) => setRequestStatus(res));
 
+    setFormSubmitted(true);
     return;
+  }
+
+  function isValidIBT(ibt: string) {
+    return ibt.match(/\b\d{7}\b/g);
+  }
+
+  function doesNotExistOnZendesk(ibt: string) {
+    return !existingTickets.some((ticket) => ticket.problem_ibt === ibt);
   }
 
   return (
@@ -67,6 +77,7 @@ function ProblemIbtForm({
           setRequestStatus(undefined);
           handleUpdate(e);
         }}
+        required={true}
       ></textarea>
 
       <label htmlFor="author" className="mb-1">
@@ -85,7 +96,8 @@ function ProblemIbtForm({
 
       <button
         type="submit"
-        className="rounded-md bg-indigo-600 mb-6 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="rounded-md bg-indigo-600 mb-6 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:bg-indigo-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        disabled={formSubmitted}
       >
         Send problem ibts to zendesk
       </button>
@@ -97,7 +109,7 @@ function ProblemIbtForm({
           </a>
         </div>
       ) : null}
-      <div>
+      <div className="w-1/3">
         <p>IBTs that you have entered above will appear below</p>
         <p>
           IBTs in red will not be sent to zendesk, green will be sent to zendesk
@@ -107,21 +119,16 @@ function ProblemIbtForm({
               <div
                 key={ibt + i}
                 className={`${
-                  ibt.match(/\b\d{7}\b/g) &&
-                  existingTickets.find(
-                    (ticket) => ticket.problem_ibt === ibt,
-                  ) === undefined
+                  isValidIBT(ibt) && doesNotExistOnZendesk(ibt)
                     ? "border-green-500 border-2 rounded"
                     : "border-red-700 border-2 rounded"
                 } p-1 m-2
                   `}
               >
                 {ibt}
-                {existingTickets.find(
-                  (ticket) => ticket.problem_ibt === ibt,
-                ) === undefined
+                {doesNotExistOnZendesk(ibt)
                   ? null
-                  : " This problem IBT already exists in Zendesk, it won't be sent"}
+                  : " - This problem IBT already exists in Zendesk, it won't be sent"}
               </div>
             ))
           : null}
