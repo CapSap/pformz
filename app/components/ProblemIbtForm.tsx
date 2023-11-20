@@ -53,6 +53,14 @@ function ProblemIbtForm({
     return;
   }
 
+  function isValidIBT(ibt: string) {
+    return ibt.match(/\b\d{7}\b/g);
+  }
+
+  function doesNotExistOnZendesk(ibt: string) {
+    return !existingTickets.some((ticket) => ticket.problem_ibt === ibt);
+  }
+
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
@@ -101,7 +109,7 @@ function ProblemIbtForm({
           </a>
         </div>
       ) : null}
-      <div>
+      <div className="w-1/3">
         <p>IBTs that you have entered above will appear below</p>
         <p>
           IBTs in red will not be sent to zendesk, green will be sent to zendesk
@@ -111,21 +119,16 @@ function ProblemIbtForm({
               <div
                 key={ibt + i}
                 className={`${
-                  ibt.match(/\b\d{7}\b/g) &&
-                  existingTickets.find(
-                    (ticket) => ticket.problem_ibt === ibt,
-                  ) === undefined
+                  isValidIBT(ibt) && doesNotExistOnZendesk(ibt)
                     ? "border-green-500 border-2 rounded"
                     : "border-red-700 border-2 rounded"
                 } p-1 m-2
                   `}
               >
                 {ibt}
-                {existingTickets.find(
-                  (ticket) => ticket.problem_ibt === ibt,
-                ) === undefined
+                {doesNotExistOnZendesk(ibt)
                   ? null
-                  : " This problem IBT already exists in Zendesk, it won't be sent"}
+                  : " - This problem IBT already exists in Zendesk, it won't be sent"}
               </div>
             ))
           : null}
