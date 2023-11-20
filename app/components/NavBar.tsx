@@ -10,6 +10,10 @@ const links = [
     href: "/submit-bulk-ibts",
     label: "Submit bulk problem IBTs to zendesk",
   },
+  {
+    href: "/stock-checker",
+    label: "Stock Checker",
+  },
 ];
 
 const notSignedInLinks = [
