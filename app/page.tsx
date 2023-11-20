@@ -28,13 +28,13 @@ export default function Home() {
       <div>
         <div className="landing-background"></div>
         <div className="ml-60 pt-72 ">
-          <h1 className="text-9xl">
+          <h1 className="text-6xl">
             Welcome {user.emailAddresses[0].emailAddress}
           </h1>
-          <p className="text-5xl mt-10">
+          <p className="text-4xl mt-10">
             hello and welcome to the paddy form app.
           </p>
-          <p className="text-4xl mt-2">
+          <p className="text-3xl mt-2">
             Click a link in the top right to get started
           </p>
         </div>
