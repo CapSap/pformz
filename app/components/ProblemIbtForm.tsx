@@ -128,6 +128,10 @@ function ProblemIbtForm({
         <p>
           IBTs in red will not be sent to zendesk, green will be sent to zendesk
         </p>
+        <p>
+          IBTs that are duplicates will only be sent to zendesk once (if they
+          are 7 digits long)
+        </p>
         {ibts
           ? ibts.map((ibt, i) => (
               <div
@@ -137,15 +141,13 @@ function ProblemIbtForm({
                     ? "border-green-500 border-2 rounded"
                     : "border-red-700 border-2 rounded"
                 } p-1 m-2
-                  `}
+                  ${isUniqueIBT(ibt) ? "" : "border-orange-300"}`}
               >
                 {ibt}
                 {doesNotExistOnZendesk(ibt)
                   ? null
                   : " - This problem IBT already exists in Zendesk, it won't be sent"}{" "}
-                {isUniqueIBT(ibt)
-                  ? null
-                  : "- This IBT number is a duplicate. Only 1 will be sent to zendesk"}
+                {isUniqueIBT(ibt) ? null : "- This IBT number is a duplicate"}
               </div>
             ))
           : null}
