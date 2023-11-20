@@ -46,23 +46,18 @@ function StockChecker() {
       </form>
       <div>
         <h1>Results</h1>
+
         {storeStockLevels && storeStockLevels.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Store</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {storeStockLevels.map((store) => (
-                <tr key={store.name}>
-                  <td>{store.name}</td>
-                  <td>{store.quantity}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="grid grid-cols-2 w-1/2">
+            <h3 className="font-bold">Store Name</h3>
+            <h3 className="font-bold">Quantity</h3>
+            {storeStockLevels.map((store) => (
+              <>
+                <p key={store.name}>{store.name}</p>{" "}
+                <p key={store.name + store.quantity}>{store.quantity}</p>
+              </>
+            ))}
+          </div>
         ) : null}
       </div>
     </div>
