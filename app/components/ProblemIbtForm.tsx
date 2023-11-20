@@ -23,6 +23,7 @@ function ProblemIbtForm({
   const [ibts, setIbts] = useState<string[]>();
   const [author, setAuthor] = useState<string>("");
   const [requestStatus, setRequestStatus] = useState<RequestStatus>();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   function handleUpdate(e: ChangeEvent<HTMLTextAreaElement>) {
     // remove whitespace at start and end to prevent empty string element in array
@@ -48,6 +49,7 @@ function ProblemIbtForm({
       .then((res) => JSON.parse(res.body))
       .then((res) => setRequestStatus(res));
 
+    setFormSubmitted(true);
     return;
   }
 
@@ -67,6 +69,7 @@ function ProblemIbtForm({
           setRequestStatus(undefined);
           handleUpdate(e);
         }}
+        required={true}
       ></textarea>
 
       <label htmlFor="author" className="mb-1">
@@ -85,7 +88,8 @@ function ProblemIbtForm({
 
       <button
         type="submit"
-        className="rounded-md bg-indigo-600 mb-6 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="rounded-md bg-indigo-600 mb-6 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:bg-indigo-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        disabled={formSubmitted}
       >
         Send problem ibts to zendesk
       </button>
