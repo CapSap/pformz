@@ -53,12 +53,25 @@ function ProblemIbtForm({
     return;
   }
 
-  function isValidIBT(ibt: string) {
-    return ibt.match(/\b\d{7}\b/g);
+  function isValidIBT(ibt: string): boolean {
+    return /\b\d{7}\b/g.test(ibt);
   }
 
   function doesNotExistOnZendesk(ibt: string) {
     return !existingTickets.some((ticket) => ticket.problem_ibt === ibt);
+  }
+
+  function isUniqueIBT(ibt: string): boolean {
+    // count every element in array that === ibt, then return count > 1
+    let count = 0;
+    ibts?.forEach((el) => {
+      if (el === ibt) {
+        count++;
+      }
+    });
+    // if ibt is unique, then count should be 1
+    // if ibt is not unique, then count should be > 1
+    return count === 1;
   }
 
   return (
@@ -128,7 +141,10 @@ function ProblemIbtForm({
                 {ibt}
                 {doesNotExistOnZendesk(ibt)
                   ? null
-                  : " - This problem IBT already exists in Zendesk, it won't be sent"}
+                  : " - This problem IBT already exists in Zendesk, it won't be sent"}{" "}
+                {isUniqueIBT(ibt)
+                  ? null
+                  : "- This IBT number is a duplicate. Only 1 will be sent to zendesk"}
               </div>
             ))
           : null}
