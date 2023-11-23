@@ -34,13 +34,15 @@ function StockChecker() {
     <div className=" ">
       <div className="flex flex-col items-center">
         <div className="landing-background opacity-25" />
-        <p className="text-lg">Input a sku to check which stores have stock</p>
+        <p className="text-lg pt-40">
+          Input a sku to check which stores have stock
+        </p>
         <form onSubmit={(e) => checkSku(e)} className="">
           <label className="text-lg" htmlFor="sku">
             SKU{" "}
           </label>
           <input
-            className="border border-black m-3 rounded-sm"
+            className="border border-black m-3 rounded-sm pl-2"
             type="text"
             name="sku"
             onChange={(e) => {
@@ -53,10 +55,10 @@ function StockChecker() {
         </form>
       </div>
       <div className="flex flex-col items-center ">
-        <h1 className="text-lg">Results</h1>
+        <h1 className="text-xl font-bold">Results</h1>
 
         {storeStockLevels && storeStockLevels.length > 0 ? (
-          <div className="grid grid-cols-2 w-1/4">
+          <div className="grid grid-cols-2 w-1/4 text-center ">
             <h3 className="font-bold">Store Name</h3>
             <h3 className="font-bold">Quantity</h3>
             {storeStockLevels.map((store) => (
