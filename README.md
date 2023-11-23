@@ -1,5 +1,5 @@
 # Paddy form
-This is a simple form to improve a workflow when logging many tasks into zendesk (setting the correct tags and format, etc). Previous workflow would require each ticket to be created individually within the zendesk workspace, and tags would have to be set correctly. 
+This is a simple web app to improve a workflow when logging many tasks into zendesk (setting the correct tags and format, checking for duplicates, etc). Previous workflow was a very manual process and would require each ticket to be created individually within the zendesk workspace, and tags would have to be set correctly. 
 
 - Link to live site: https://pformz.vercel.app/
 
@@ -19,17 +19,14 @@ It works via the [zendesk api](https://developer.zendesk.com/api-reference/ticke
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repo
+```git clone git@github.com:CapSap/pformz.git```
+2. Install node modules
+```npm i```
+3. Bring in your zendesk api keys in .env. Get in touch if you want to contribute
+4. run the dev server
+```npm run dev```
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You will need to add zendesk api keys to the .env file  
 
