@@ -28,7 +28,7 @@ function StockChecker() {
       .then((res) => setStoreStockLevels(res));
   }
 
-  console.log(useRouter());
+  console.log("use router", useRouter());
 
   return (
     <div className=" ">
