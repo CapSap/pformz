@@ -31,29 +31,37 @@ function StockChecker() {
   }
 
   return (
-    <div>
-      <p>Input a sku to check which stores have stock</p>
-      <form onSubmit={(e) => checkSku(e)}>
-        <label htmlFor="sku">SKU </label>
-        <input
-          type="text"
-          name="sku"
-          onChange={(e) => {
-            setSku(e.target.value);
-          }}
-        />
-        <button>Get Stock Levels</button>
-      </form>
-      <div>
-        <h1>Results</h1>
+    <div className=" ">
+      <div className="flex flex-col items-center">
+        <div className="landing-background opacity-25" />
+        <p className="text-lg">Input a sku to check which stores have stock</p>
+        <form onSubmit={(e) => checkSku(e)} className="">
+          <label className="text-lg" htmlFor="sku">
+            SKU{" "}
+          </label>
+          <input
+            className="border border-black m-3 rounded-sm"
+            type="text"
+            name="sku"
+            onChange={(e) => {
+              setSku(e.target.value);
+            }}
+          />
+          <button className="rounded-md bg-indigo-600 mb-6 px-1 py-1 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:bg-indigo-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            Get Stock Levels
+          </button>
+        </form>
+      </div>
+      <div className="flex flex-col items-center ">
+        <h1 className="text-lg">Results</h1>
 
         {storeStockLevels && storeStockLevels.length > 0 ? (
-          <div className="grid grid-cols-2 w-1/2">
+          <div className="grid grid-cols-2 w-1/4">
             <h3 className="font-bold">Store Name</h3>
             <h3 className="font-bold">Quantity</h3>
             {storeStockLevels.map((store) => (
               <>
-                <p key={store.name}>{store.name}</p>{" "}
+                <p key={store.name}>{store.name}</p>
                 <p key={store.name + store.quantity}>{store.quantity}</p>
               </>
             ))}
