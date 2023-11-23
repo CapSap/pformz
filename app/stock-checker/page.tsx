@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { StringLiteral } from "typescript";
+import { FormEvent, useState } from "react";
 
 type store = {
   name: string;
@@ -17,7 +16,7 @@ function StockChecker() {
 
   const [storeStockLevels, setStoreStockLevels] = useState<store[]>();
 
-  async function checkSku(e) {
+  async function checkSku(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const result = await fetch(`http://localhost:3000/api/stock-checker`, {
       method: "POST",
@@ -26,8 +25,6 @@ function StockChecker() {
       .then((res) => res.json())
       .then((res) => JSON.parse(res.body))
       .then((res) => setStoreStockLevels(res));
-
-    console.log(result);
   }
 
   return (
