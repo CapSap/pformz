@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 type store = {
   name: string;
@@ -28,7 +28,7 @@ function StockChecker() {
       .then((res) => setStoreStockLevels(res));
   }
 
-  console.log(usePathname());
+  console.log(useRouter());
 
   return (
     <div className=" ">
