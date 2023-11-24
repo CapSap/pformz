@@ -18,7 +18,7 @@ function StockChecker() {
 
   async function checkSku(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const result = await fetch(`http://localhost:3000/api/stock-checker`, {
+    const result = await fetch(`/api/stock-checker`, {
       method: "POST",
       body: JSON.stringify({ sku: sku }),
     })
