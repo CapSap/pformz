@@ -42,7 +42,7 @@ function ProblemIbtForm({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/api/problem-ibts", {
+    const res = await fetch("/api/problem-ibts", {
       method: "POST",
       body: JSON.stringify({ ibts: ibtsToBeSentToZendesk, author: author }),
     })

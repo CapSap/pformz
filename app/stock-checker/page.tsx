@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/router";
 
 type store = {
   name: string;
@@ -19,7 +18,7 @@ function StockChecker() {
 
   async function checkSku(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const result = await fetch(`http://localhost:3000/api/stock-checker`, {
+    const result = await fetch(`/api/stock-checker`, {
       method: "POST",
       body: JSON.stringify({ sku: sku }),
     })
@@ -27,8 +26,6 @@ function StockChecker() {
       .then((res) => JSON.parse(res.body))
       .then((res) => setStoreStockLevels(res));
   }
-
-  console.log("use router", useRouter());
 
   return (
     <div className=" ">
