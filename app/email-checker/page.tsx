@@ -12,7 +12,7 @@ export default function EmailChecker() {
       method: "POST",
       body: JSON.stringify(emails),
     });
-    console.log(response);
+    console.log("response", await response.json());
   }
 
   return (
