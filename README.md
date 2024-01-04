@@ -16,6 +16,7 @@ It works via the [zendesk api](https://developer.zendesk.com/api-reference/ticke
 - This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
   - Why Next? Just to learn something new. In hindsight, I'm a little over my head and I do not understand in depth how the app is working. I'm aware that there are client and server components, and it does some nice routing and API calls on the server to hide .env variables and avoids CORS, but still at ill ease with it all.
 - Tailwind for styling
+- Using Clerk for auth
 
 ## Getting Started
 
