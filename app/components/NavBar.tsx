@@ -14,6 +14,10 @@ const links = [
     href: "/stock-checker",
     label: "Stock Checker",
   },
+  {
+    href: "/email-checker",
+    label: "Email checker",
+  },
 ];
 
 const notSignedInLinks = [
