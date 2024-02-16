@@ -59,6 +59,9 @@ export const POST = async (req: Request) => {
       });
   } catch (error) {
     console.error("error with making post request to zendesk", error);
-    return error;
+    return NextResponse.json({
+      message: "there was an error making post request to zendesk",
+      body: error,
+    });
   }
 };
