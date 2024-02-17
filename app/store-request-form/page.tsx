@@ -26,7 +26,10 @@ function StoreRequstForm() {
 
   function addMoreItems(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    setRequestItems([...requestItems, { id: Date.now() }]);
+    setRequestItems([
+      ...requestItems,
+      { id: Date.now(), quantity: "", sku: "", description: "" },
+    ]);
   }
 
   function removeSingleItem(
@@ -114,7 +117,7 @@ function StoreRequstForm() {
               <label htmlFor="description">Description</label>
               <input
                 type="text"
-                value={item.sku}
+                value={item.description}
                 onChange={(e) => handleItemChange(e, item.id, index)}
               />
               <button onClick={(e) => removeSingleItem(e, item)}>
