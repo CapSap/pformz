@@ -1,15 +1,24 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
+
+type items = {
+  id: number;
+};
 
 function StoreRequstForm() {
-  const [requestItems, setRequestItems] = useState([{ id: Date.now() }]);
+  const [requestItems, setRequestItems] = useState<items[]>([
+    { id: Date.now() },
+  ]);
 
   function addMoreItems(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setRequestItems([...requestItems, { id: Date.now() }]);
   }
 
-  function removeSingleItem(e, item) {
+  function removeSingleItem(
+    e: React.MouseEvent<HTMLButtonElement>,
+    item: items,
+  ) {
     e.preventDefault();
     const newState = requestItems.filter((el, index) => {
       console.log("filter run count", index);
