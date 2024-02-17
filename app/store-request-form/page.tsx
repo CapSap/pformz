@@ -61,8 +61,16 @@ function StoreRequstForm() {
 
   function submitForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("subt mit clicked");
+    console.log("subt mit clicked. sending", customerDetails);
   }
+
+  const customerDetails = {
+    name: customerName,
+    phone: customerPhone,
+    email: customerEmail,
+    items: requestItems,
+    deliveryMethod: deliveryMethod,
+  };
   return (
     <div>
       <h1>store request form</h1>
@@ -111,12 +119,14 @@ function StoreRequstForm() {
               <label htmlFor="sku">SKU</label>
               <input
                 type="text"
+                name="sku"
                 value={item.sku}
                 onChange={(e) => handleItemChange(e, item.id, index)}
               />
               <label htmlFor="description">Description</label>
               <input
                 type="text"
+                name="description"
                 value={item.description}
                 onChange={(e) => handleItemChange(e, item.id, index)}
               />
