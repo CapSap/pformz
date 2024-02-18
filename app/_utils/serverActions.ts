@@ -52,7 +52,7 @@ export const submitIbts = async (data: FormData) => {
   return result;
 };
 
-export async function getData() {
+export async function getZendeskData() {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -96,4 +96,20 @@ export async function getData() {
     .catch((error) =>
       console.error("there was an error fetching tickets from zendesk", error),
     );
+}
+
+import { Pool } from "pg";
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+export async function getDatabaseData() {
+  const client = await pool.connect();
+  try {
+    const response = await client.query("SELECT version()");
+    console.log(response.rows[0]);
+    return response.rows[0];
+  } finally {
+    client.release();
+  }
 }
