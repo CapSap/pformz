@@ -59,7 +59,20 @@ function StoreRequstForm() {
     setRequestItems(newStateArray);
   }
 
-  function submitForm(e: React.FormEvent<HTMLFormElement>) {
+  const dummyRequest = {
+    customerName: "billy",
+    deliveryMethod: "store",
+    items: [
+      {
+        id: 1,
+        sku: "50915003041L",
+        description: "not sure what item this is",
+        quantity: 5,
+      },
+    ],
+  };
+
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("subt mit clicked. sending", customerDetails);
   }
@@ -80,7 +93,7 @@ function StoreRequstForm() {
         perspiciatis atque, neque vero provident ratione magni? Perferendis iste
         voluptates placeat ex!
       </div>
-      <form onSubmit={(e) => submitForm(e)}>
+      <form onSubmit={(e) => handleFormSubmit(e)}>
         <div>
           <h2>Customer Details</h2>
           <label htmlFor="customerName">Customer Name</label>
