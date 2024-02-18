@@ -1,18 +1,9 @@
-import { getDBData } from "../_utils/serverActions";
+import { getDatabaseData } from "../_utils/serverActions";
 import StoreRequstForm from "../components/StoreRequestForm";
 
-import Page from "../_utils/serverActions";
-
 async function StoreRequestPage() {
-  const data = await getDBData();
-  console.log("db data", data);
+  const data = await getDatabaseData();
 
-  console.log("page", await Page());
-  return (
-    <div>
-      hello world
-      <StoreRequstForm />
-    </div>
-  );
+  return <StoreRequstForm />;
 }
 export default StoreRequestPage;
