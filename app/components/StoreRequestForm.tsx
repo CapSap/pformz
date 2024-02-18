@@ -72,9 +72,24 @@ function StoreRequstForm() {
     ],
   };
 
-  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     console.log("subt mit clicked. sending", customerDetails);
+
+    const res = await fetch("/api/store-request", {
+      method: "POST",
+      body: JSON.stringify({ storeRequest: dummyRequest }),
+    })
+      .then((res) => {
+        console.log("log from then", res.body);
+        return res;
+      })
+      .then((res) => res.json());
+
+    console.log("response from form page", res);
+
+    return;
   }
 
   const customerDetails = {
