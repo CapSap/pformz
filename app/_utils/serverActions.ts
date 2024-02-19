@@ -98,7 +98,8 @@ export async function getZendeskData() {
     );
 }
 
-import { Pool } from "pg";
+import { Client, Pool } from "pg";
+// connect database
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
@@ -109,7 +110,27 @@ export async function getDatabaseData() {
     const response = await client.query("SELECT version()");
     console.log(response.rows[0]);
     return response.rows[0];
+  } catch (err) {
+    console.error(err);
   } finally {
     client.release();
+  }
+}
+// basic query to insert into table
+export async function postStoreRequest(text: string, values: string[]) {
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  await client.connect();
+
+  try {
+    const response = await client.query(text, values);
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    client.end();
   }
 }
