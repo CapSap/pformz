@@ -1,32 +1,30 @@
 import { NextResponse } from "next/server";
 
-import { query } from "@/app/_utils/serverActions";
-
-import * as db from "@/app/_utils/db";
+import { postStoreRequest } from "@/app/_utils/serverActions";
 
 export const POST = async (req: Request) => {
-  console.log("post to db attempt running");
-
   const storeRequest = await req.json();
 
   if (!req.body) {
     return NextResponse.json({ error: "no body", status: 400 });
   }
 
-  console.log("log from route", storeRequest);
+  const queryString = `INSERT INTO store_request (customername, customerphone, customeremail, deliverymethod, customeraddress, requestingstore, requeststatus)
+VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
-  //   const result = await db.query("SELECT * FROM store_request");
+  const queryParams = [
+    storeRequest.customerName,
+    storeRequest.customerPhone,
+    storeRequest.customerEmail,
+    storeRequest.deliveryMethod,
+    storeRequest.customerAddress,
+    storeRequest.requestingStore,
+    storeRequest.requestStatus,
+  ];
 
-  //   console.log(result);
-
-  // what should be in here?
-  // how exactly should i make the post request?
-
-  // in server action the connection to the db lives there.
-  // so i feel like there should be post route at this address/folder
-  // and it should access whatever is in the serverACtions file
+  const dataBaseResponse = await postStoreRequest(queryString, queryParams);
 
   return NextResponse.json({
-    body: { ...storeRequest, extra: "something extra from the route" },
+    body: { dataBaseResponse },
   });
 };
