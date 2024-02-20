@@ -71,9 +71,11 @@ function StoreRequstForm() {
         quantity: 5,
       },
     ],
+    note: {
+      noteText: "hello friends",
+      noteAuthor: "Yo mama",
+    },
   };
-
-  const dummy2 = { customerName: "billy bob" };
 
   async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -82,7 +84,7 @@ function StoreRequstForm() {
 
     const routeRes = await fetch("/api/store-request", {
       method: "POST",
-      body: JSON.stringify(dummy2),
+      body: JSON.stringify(dummyRequest),
     }).then((res) => {
       console.log(res);
       return res.json();
