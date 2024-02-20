@@ -98,7 +98,7 @@ export async function getZendeskData() {
     );
 }
 
-import { Client, Pool } from "pg";
+import { Pool } from "pg";
 // connect database
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -117,20 +117,37 @@ export async function getDatabaseData() {
   }
 }
 // basic query to insert into table
-export async function postStoreRequest(text: string, values: string[]) {
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
-  await client.connect();
+export async function postStoreRequest(text: string, values: [], items, note) {
+  const client = await pool.connect();
 
   try {
-    const response = await client.query(text, values);
-    console.log(response);
-    return response;
+    await client.query("BEGIN");
+    const storeRequestResponse = await client.query(text, values);
+    console.log(storeRequestResponse);
+
+    // what do i need to do?
+    // i need to post a request. request may have many have lots of items
+    // oh! but i can submit i query to the items table that has many items.
+
+    // so. should
+
+    const itemArray = items.reduce();
+    await Promise.all(
+      items.map((item) => {
+        client.query();
+
+        // instead of mapping and doing 1 query for every item, could i insert many at once?
+        // yes i think i can
+        // but data needs to be ?
+      }),
+    );
+
+    await client.query("COMMIT");
+    return storeRequestResponse;
   } catch (err) {
+    await client.query("ROLLBACK");
     console.error(err);
   } finally {
-    client.end();
+    client.release();
   }
 }
