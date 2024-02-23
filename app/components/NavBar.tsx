@@ -16,7 +16,7 @@ const links = [
   },
   {
     href: "/store-request-form",
-    label: "/Store Requests",
+    label: "Store Requests",
   },
 ];
 
