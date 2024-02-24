@@ -1,7 +1,7 @@
 "use client";
 
 import { UserButton } from "@clerk/nextjs";
-import Link from "next/link";
+import { Link } from "@chakra-ui/next-js";
 import { useUser } from "@clerk/nextjs";
 
 const links = [

@@ -2,7 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@chakra-ui/next-js";
 
 export default function Home() {
   const { isSignedIn, user, isLoaded } = useUser();
