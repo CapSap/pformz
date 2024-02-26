@@ -2,6 +2,25 @@
 import React, { useState } from "react";
 import { postStoreRequest } from "../_utils/serverActions";
 
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  Input,
+  Flex,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Radio,
+  RadioGroup,
+  Text,
+  Textarea,
+  Stack,
+  Center,
+} from "@chakra-ui/react";
+
 type item = {
   id: number;
   quantity: string;
@@ -109,102 +128,131 @@ function StoreRequstForm() {
   };
   return (
     <div>
-      <h1>store request form</h1>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, corporis
-        natus accusamus voluptatem minima unde exercitationem nesciunt placeat
-        perspiciatis atque, neque vero provident ratione magni? Perferendis iste
-        voluptates placeat ex!
-      </div>
+      <Box mb={10} ml={6} w={"40%"}>
+        <Heading>store request form</Heading>
+        <Text fontSize={"2xl"}>
+          Hello and welcome to the paddy store request form. Here you will be
+          able to make requests to ecomm to post things out direct to your
+          customers.
+        </Text>
+      </Box>
       <form onSubmit={(e) => handleFormSubmit(e)}>
-        <div>
-          <h2>Customer Details</h2>
-          <label htmlFor="customerName">Customer Name</label>
-          <input
-            type="text"
-            name="customerName"
-            onChange={(e) => setCustomerName(e.target.value)}
-            value={customerName}
-          />
-          <label htmlFor="customerPhone">Customer Phone</label>
-          <input
-            type="text"
-            name="customerPhone"
-            onChange={(e) => setCustomerPhone(e.target.value)}
-            value={customerPhone}
-          />
-          <label htmlFor="customerEmail">Customer Email</label>
-          <input
-            type="text"
-            name="customerEmail"
-            onChange={(e) => setCustomerEmail(e.target.value)}
-            value={customerEmail}
-          />
-        </div>
-        <div>
-          <h2>Item details</h2>
-          {requestItems.map((item, index) => (
-            <div key={item.id}>
-              <label htmlFor="quantity">Quantity</label>
-              <input
-                type="text"
-                name="quantity"
-                value={item.quantity}
-                onChange={(e) => handleItemChange(e, item.id, index)}
-              />
-              <label htmlFor="sku">SKU</label>
-              <input
-                type="text"
-                name="sku"
-                value={item.sku}
-                onChange={(e) => handleItemChange(e, item.id, index)}
-              />
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                name="description"
-                value={item.description}
-                onChange={(e) => handleItemChange(e, item.id, index)}
-              />
-              <button onClick={(e) => removeSingleItem(e, item)}>
-                Remove item
-              </button>
-            </div>
-          ))}
-          <button onClick={(e) => addMoreItems(e)}>Add more items</button>
-        </div>
-        <div>
-          <h2>Direct to customer or store?</h2>
-          <label htmlFor="deliveryChooser">
+        <Container>
+          <Heading size="md">Customer Details</Heading>
+          <FormControl>
+            <FormLabel htmlFor="customerName">Customer Name</FormLabel>
+            <Input
+              type="text"
+              name="customerName"
+              onChange={(e) => setCustomerName(e.target.value)}
+              value={customerName}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="customerPhone">Customer Phone</FormLabel>
+            <Input
+              type="tel"
+              name="customerPhone"
+              onChange={(e) => setCustomerPhone(e.target.value)}
+              value={customerPhone}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="customerEmail">Customer Email</FormLabel>
+            <Input
+              type="text"
+              name="customerEmail"
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              value={customerEmail}
+            />
+          </FormControl>
+        </Container>
+        <Container>
+          <Heading size="md">Item details</Heading>
+          <Flex>
+            {requestItems.map((item, index) => (
+              <Box key={item.id}>
+                <FormControl>
+                  <FormLabel htmlFor="quantity">Quantity</FormLabel>
+                  <Input
+                    type="text"
+                    name="quantity"
+                    value={item.quantity}
+                    onChange={(e) => handleItemChange(e, item.id, index)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor="sku">SKU</FormLabel>
+                  <Input
+                    type="text"
+                    name="sku"
+                    value={item.sku}
+                    onChange={(e) => handleItemChange(e, item.id, index)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor="description">Description</FormLabel>
+                  <Input
+                    type="text"
+                    name="description"
+                    value={item.description}
+                    onChange={(e) => handleItemChange(e, item.id, index)}
+                  />
+                </FormControl>
+                <Button
+                  onClick={(e) => removeSingleItem(e, item)}
+                  size="xs"
+                  colorScheme="yellow"
+                >
+                  Remove item
+                </Button>
+              </Box>
+            ))}
+          </Flex>
+          <Center mt={4} mb={4}>
+            <Button colorScheme="green" onClick={(e) => addMoreItems(e)}>
+              Add more items
+            </Button>
+          </Center>
+        </Container>
+        <Container>
+          <Heading size="md">Direct to customer or store?</Heading>
+
+          <FormLabel htmlFor="deliveryChooser">
             Where should the product be sent to?
-          </label>
-          <select
+          </FormLabel>
+          <RadioGroup
             name="deliveryChooser"
             id="deliveryChooser"
-            onChange={(e) => {
-              setDeliveryMethod(e.target.value);
+            onChange={(value) => {
+              setDeliveryMethod(value);
             }}
           >
-            <option value="store">Store</option>
-            <option value="customerAddress">Customer Address</option>
-          </select>
+            {" "}
+            <Stack direction="row">
+              <Radio value="store">Store</Radio>
+              <Radio value="customerAddress">Customer Address</Radio>
+            </Stack>
+          </RadioGroup>
           {deliveryMethod === "store" ? (
             <p>Sending product to your store</p>
           ) : (
-            <div>
-              <label htmlFor="customerAddress">Customer Address</label>
-              <textarea
+            <Box>
+              <FormLabel htmlFor="customerAddress">Customer Address</FormLabel>
+              <Textarea
                 name="customerAddress"
                 id="customerAddress"
                 cols={30}
                 rows={5}
                 onChange={(e) => setCustomerAddress(e.target.value)}
                 value={customerAddress}
-              ></textarea>
-            </div>
+              ></Textarea>
+            </Box>
           )}
-        </div>
-        <button>Send request </button>
+          <Button size={"lg"} colorScheme="whatsapp">
+            Send request{" "}
+          </Button>
+        </Container>
       </form>
     </div>
   );
