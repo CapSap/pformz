@@ -19,11 +19,16 @@ import {
   Textarea,
   Stack,
   Center,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 
 type item = {
   id: number;
-  quantity: string;
+  quantity: number;
   sku: string;
   description: string;
 };
@@ -32,7 +37,7 @@ function StoreRequstForm() {
   const [requestItems, setRequestItems] = useState<item[]>([
     {
       id: Date.now(),
-      quantity: "",
+      quantity: 1,
       sku: "",
       description: "",
     },
@@ -48,7 +53,7 @@ function StoreRequstForm() {
     e.preventDefault();
     setRequestItems([
       ...requestItems,
-      { id: Date.now(), quantity: "", sku: "", description: "" },
+      { id: Date.now(), quantity: 1, sku: "", description: "" },
     ]);
   }
 
@@ -76,6 +81,17 @@ function StoreRequstForm() {
       }
     });
 
+    setRequestItems(newStateArray);
+  }
+
+  function handleQuantityChange(value: number, id: number, index: number) {
+    const newStateArray = requestItems.map((el) => {
+      if (el.id === id) {
+        return { ...requestItems[index], quantity: value };
+      } else {
+        return el;
+      }
+    });
     setRequestItems(newStateArray);
   }
 
@@ -174,14 +190,23 @@ function StoreRequstForm() {
             {requestItems.map((item, index) => (
               <Box mt={2} key={item.id}>
                 <Heading size="sm">Item #{index + 1}</Heading>
-                <FormControl>
-                  <FormLabel htmlFor="quantity">Quantity</FormLabel>
-                  <Input
-                    type="text"
-                    name="quantity"
-                    value={item.quantity}
-                    onChange={(e) => handleItemChange(e, item.id, index)}
-                  />
+                <FormControl w={100} flexDirection={"row"}>
+                  <FormLabel>Quantity</FormLabel>
+                  <NumberInput
+                    onChange={(value) =>
+                      handleQuantityChange(
+                        Number.parseInt(value),
+                        item.id,
+                        index,
+                      )
+                    }
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
                 </FormControl>
                 <FormControl>
                   <FormLabel htmlFor="sku">SKU</FormLabel>
