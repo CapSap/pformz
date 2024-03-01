@@ -128,6 +128,7 @@ function StoreRequstForm() {
   };
   return (
     <div>
+      <div className="landing-background opacity-25" />
       <Box mb={10} ml={6} w={"40%"}>
         <Heading>store request form</Heading>
         <Text fontSize={"2xl"}>
