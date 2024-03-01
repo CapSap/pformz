@@ -24,6 +24,7 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  HStack,
 } from "@chakra-ui/react";
 
 type item = {
@@ -190,23 +191,28 @@ function StoreRequstForm() {
             {requestItems.map((item, index) => (
               <Box mt={2} key={item.id}>
                 <Heading size="sm">Item #{index + 1}</Heading>
-                <FormControl w={100} flexDirection={"row"}>
-                  <FormLabel>Quantity</FormLabel>
-                  <NumberInput
-                    onChange={(value) =>
-                      handleQuantityChange(
-                        Number.parseInt(value),
-                        item.id,
-                        index,
-                      )
-                    }
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
+                <FormControl w={170} flexDirection={"row"}>
+                  <HStack>
+                    <FormLabel>Quantity</FormLabel>
+                    <NumberInput
+                      min={1}
+                      defaultValue={1}
+                      value={item.quantity}
+                      onChange={(value) =>
+                        handleQuantityChange(
+                          Number.parseInt(value),
+                          item.id,
+                          index,
+                        )
+                      }
+                    >
+                      <NumberInputField />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
+                  </HStack>
                 </FormControl>
                 <FormControl>
                   <FormLabel htmlFor="sku">SKU</FormLabel>
@@ -231,6 +237,7 @@ function StoreRequstForm() {
                   onClick={(e) => removeSingleItem(e, item)}
                   size="xs"
                   colorScheme="yellow"
+                  isDisabled={requestItems.length === 1 ? true : false}
                 >
                   Remove item
                 </Button>
