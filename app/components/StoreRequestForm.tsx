@@ -137,7 +137,7 @@ function StoreRequstForm() {
           customers.
         </Text>
       </Box>
-      <form onSubmit={(e) => handleFormSubmit(e)}>
+      <form onSubmit={(e) => handleFormSubmit(e)} className="mt-44">
         <Container>
           <Heading size="md">Customer Details</Heading>
           <FormControl>
@@ -170,9 +170,10 @@ function StoreRequstForm() {
         </Container>
         <Container>
           <Heading size="md">Item details</Heading>
-          <Flex>
+          <Flex flexDirection="column">
             {requestItems.map((item, index) => (
               <Box key={item.id}>
+                <Heading size="sm">Item #{index + 1}</Heading>
                 <FormControl>
                   <FormLabel htmlFor="quantity">Quantity</FormLabel>
                   <Input
@@ -250,6 +251,7 @@ function StoreRequstForm() {
               ></Textarea>
             </Box>
           )}
+
           <Button size={"lg"} colorScheme="whatsapp">
             Send request{" "}
           </Button>
