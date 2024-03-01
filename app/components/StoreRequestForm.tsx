@@ -231,7 +231,6 @@ function StoreRequstForm() {
               setDeliveryMethod(value);
             }}
           >
-            {" "}
             <Stack direction="row">
               <Radio value="store">Store</Radio>
               <Radio value="customerAddress">Customer Address</Radio>
@@ -254,7 +253,7 @@ function StoreRequstForm() {
           )}
           <Center mt={4} mb={4}>
             <Button size={"lg"} colorScheme="whatsapp">
-              Send request{" "}
+              Send request
             </Button>
           </Center>
         </Container>
