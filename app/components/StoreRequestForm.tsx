@@ -214,7 +214,7 @@ function StoreRequstForm() {
                     </NumberInput>
                   </HStack>
                 </FormControl>
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel htmlFor="sku">SKU</FormLabel>
                   <Input
                     type="text"
@@ -223,7 +223,7 @@ function StoreRequstForm() {
                     onChange={(e) => handleItemChange(e, item.id, index)}
                   />
                 </FormControl>
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel htmlFor="description">Description</FormLabel>
                   <Input
                     type="text"
