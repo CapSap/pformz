@@ -45,10 +45,10 @@ function StoreRequstForm() {
   ]);
 
   const [deliveryMethod, setDeliveryMethod] = useState("store");
-  const [customerName, setCustomerName] = useState<string>();
-  const [customerPhone, setCustomerPhone] = useState<string>();
-  const [customerEmail, setCustomerEmail] = useState<string>();
-  const [customerAddress, setCustomerAddress] = useState<string>();
+  const [customerName, setCustomerName] = useState<string>("");
+  const [customerPhone, setCustomerPhone] = useState<string>("");
+  const [customerEmail, setCustomerEmail] = useState<string>("");
+  const [customerAddress, setCustomerAddress] = useState<string>("");
 
   function addMoreItems(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -157,7 +157,7 @@ function StoreRequstForm() {
       <form onSubmit={(e) => handleFormSubmit(e)} className="mt-44 mb-44">
         <Container mb={4}>
           <Heading size="md">Customer Details</Heading>
-          <FormControl>
+          <FormControl isRequired={true}>
             <FormLabel htmlFor="customerName">Customer Name</FormLabel>
             <Input
               type="text"
@@ -166,7 +166,7 @@ function StoreRequstForm() {
               value={customerName}
             />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired={true}>
             <FormLabel htmlFor="customerPhone">Customer Phone</FormLabel>
             <Input
               type="tel"
@@ -252,39 +252,42 @@ function StoreRequstForm() {
         </Container>
         <Container>
           <Heading size="md">Direct to customer or store?</Heading>
-
-          <FormLabel htmlFor="deliveryChooser">
-            Where should the product be sent to?
-          </FormLabel>
-          <RadioGroup
-            name="deliveryChooser"
-            id="deliveryChooser"
-            onChange={(value) => {
-              setDeliveryMethod(value);
-            }}
-          >
-            <Stack direction="row">
-              <Radio value="store">Store</Radio>
-              <Radio value="customerAddress">Customer Address</Radio>
-            </Stack>
-          </RadioGroup>
-          {deliveryMethod === "store" ? (
-            <p>Sending product to your store</p>
-          ) : (
-            <Box>
-              <FormLabel htmlFor="customerAddress">Customer Address</FormLabel>
-              <Textarea
-                name="customerAddress"
-                id="customerAddress"
-                cols={30}
-                rows={5}
-                onChange={(e) => setCustomerAddress(e.target.value)}
-                value={customerAddress}
-              ></Textarea>
-            </Box>
-          )}
+          <FormControl isRequired={true}>
+            <FormLabel htmlFor="deliveryChooser">
+              Where should the product be sent to?
+            </FormLabel>
+            <RadioGroup
+              name="deliveryChooser"
+              id="deliveryChooser"
+              onChange={(value) => {
+                setDeliveryMethod(value);
+              }}
+            >
+              <Stack direction="row">
+                <Radio value="store">Store</Radio>
+                <Radio value="customerAddress">Customer Address</Radio>
+              </Stack>
+            </RadioGroup>
+            {deliveryMethod === "store" ? (
+              <p>Sending product to your store</p>
+            ) : (
+              <Box>
+                <FormLabel htmlFor="customerAddress">
+                  Customer Address
+                </FormLabel>
+                <Textarea
+                  name="customerAddress"
+                  id="customerAddress"
+                  cols={30}
+                  rows={5}
+                  onChange={(e) => setCustomerAddress(e.target.value)}
+                  value={customerAddress}
+                ></Textarea>
+              </Box>
+            )}
+          </FormControl>
           <Center mt={4} mb={4}>
-            <Button size={"lg"} colorScheme="whatsapp">
+            <Button size={"lg"} colorScheme="whatsapp" type="submit">
               Send request
             </Button>
           </Center>
