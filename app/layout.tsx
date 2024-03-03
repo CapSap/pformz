@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import { ClerkProvider, UserButton } from "@clerk/nextjs";
 import NavBar from "./components/NavBar";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +21,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <header>
-            <NavBar />
-          </header>
+          <Providers>
+            <header>
+              <NavBar />
+            </header>
 
-          <div>{children}</div>
+            <div>{children}</div>
+          </Providers>
         </body>
       </html>
     </ClerkProvider>

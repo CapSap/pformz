@@ -99,6 +99,7 @@ export async function getZendeskData() {
 }
 
 import { Pool } from "pg";
+// connect database
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
@@ -109,6 +110,37 @@ export async function getDatabaseData() {
     const response = await client.query("SELECT version()");
     console.log(response.rows[0]);
     return response.rows[0];
+  } catch (err) {
+    console.error(err);
+  } finally {
+    client.release();
+  }
+}
+// basic query to insert into table
+export async function postStoreRequest(
+  text: string,
+  request: [],
+  items: [],
+  note: [],
+) {
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+    const storeRequestResponse = await client.query(text, request);
+    console.log(storeRequestResponse);
+
+    // okay so now i want to post all of the items
+
+    // instead of mapping and doing 1 query for every item, could i insert many at once?
+    // yes i think i can
+    // but data needs to be ?
+
+    await client.query("COMMIT");
+    return storeRequestResponse;
+  } catch (err) {
+    await client.query("ROLLBACK");
+    console.error(err);
   } finally {
     client.release();
   }
